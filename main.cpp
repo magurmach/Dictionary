@@ -2,7 +2,7 @@
 #include <stdio.h>     //freopen used it
 #include "AvlTree.h"
 #include <cstddef>
-#include "Dictionary.h"
+#include "dictionary.h"
 #define FRO freopen("input 1.txt","r",stdin);
 #define FROut freopen("out.txt","w",stdout);
 using namespace std;
@@ -20,7 +20,7 @@ using namespace std;
 
 int main(int argc, char **argv)
 {
-	FRO
+	//FRO
 	//FROut
 	AVLTree<int,int> tree;
 	int a,b;
@@ -43,7 +43,7 @@ int main(int argc, char **argv)
 		{
 			cin>>a;
 			AVLTree<int,int>::iterator it=tree.lookUp(a);
-			if(it.isNullprt())
+			if(it.isNullptr())
 			{
 				cout<<"not found"<<endl;
 			}
@@ -70,8 +70,63 @@ int main(int argc, char **argv)
 			cout<<"--------"<<endl;
 		}
 	}
-	Dictionary<int,int,AVLTree> mp;
 
+	cout<<"_______"<<endl;
+	cout<<"VIA MAP"<<endl;
+	cout<<"_______"<<endl;
+	Dictionary<int,int,AVLTree> mp;
+	Dictionary<int,int,AVLTree>::iterator it;
+
+	while(cin>>x)
+	{
+		if(x[0]=='i')
+		{
+			cin>>a>>b;
+			if(mp.insert(a,b))
+			{
+				cout<<"new insert"<<endl;
+			}
+			else
+			{
+				cout<<"update data"<<endl;
+			}
+		}
+		else if(x[0]=='l')
+		{
+			cin>>a;
+			it=mp.lookUp(a);
+			if(it.isNullptr())
+			{
+				cout<<"not found"<<endl;
+			}
+			else cout<<it.getData()<<endl;
+		}
+		else if(x[0]=='r')
+		{
+			cin>>a;
+			mp.remove(a);
+		}
+		else if(x[0]=='x')
+		{
+			break;
+		}
+		else if(x[0]=='c'){
+			mp.clear();
+		}
+		else if(x[0]=='p'){
+			cout<<"--------"<<endl;
+			for(it=mp.begin();it!=mp.end();it++){
+				cout<<it.getKey()<<" "<<it.getData()<<endl;
+			}
+			cout<<"--------"<<endl;
+		}
+	}
+
+	Dictionary<int,int,AVLTree> dic;
+	Dictionary<int,int,AVLTree>::iterator it1;
+	for(it1=dic.begin();it1!=dic.end();it1++){
+		cout<<it1.getKey()<<" "<<it1.getData()<<endl;
+	}
 
 	return 0;
 }

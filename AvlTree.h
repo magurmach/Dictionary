@@ -314,6 +314,9 @@ public:
 	 * */
 	class iterator : public AVLNode<T,S>
 	{
+		
+	protected:
+		
 		bool isNull;
 		
 		//! this methode finds the next element and push in stack
@@ -337,7 +340,7 @@ public:
 				this->height=0;
 			}
 		}
-		public:
+	public:
 		
 		//! empty constructor
 		iterator() : AVLNode<T,S>(){
@@ -357,20 +360,35 @@ public:
 			else isNull=false;
 		}
 		
-		//! prefix ++ operator for iterator
-		void operator ++ (){
-			this->increment();
+		
+		//!Iterator for native perimeter constructor
+		iterator(const AVLTree<T,S>::iterator & it) : AVLNode<T,S>(){
 			
+			this->isNull=it.isNull;
+			this->data=it.data;
+			this->height=it.height;
+			this->key=it.key;
+			this->left=it.left;
+			this->parent=it.parent;
+			this->right=it.right;			
+		}
+		
+		//! returns if a iterator is a nullptr
+		bool isNullptr(){
+			return isNull;
+		}
+		
+		//! prefix ++ operator for iterator
+		iterator operator ++ (){
+			this->increment();
+			return iterator(this);
 		}
 		
 		//! postfix ++ operator for iterator
-		void operator ++(int){
+		iterator operator ++(int){
+			iterator x(this);
 			this->increment();
-		}
-		
-		//! returns if a a iterator is a nullptr
-		bool isNullprt(){
-			return isNull;
+			return x;
 		}
 		
 		//! equal comperator for iterator, returns if two tree nodes are equivalent
@@ -423,7 +441,6 @@ public:
 	
 	//! return the iterator of the beginning of the AVL Tree
 	iterator begin();
-public:
 	iterator end(){
 		return iterator(nullptr);
 	}
