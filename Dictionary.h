@@ -2,10 +2,6 @@
 #define DICTIONARY_H
 
 
-#include <iostream>
-
-using namespace std;
-
 template < typename T, typename S, template<typename, typename> class Module >
 class Dictionary
 {
@@ -109,6 +105,7 @@ public:
 		return iterator(container.end());
 	}
 
+    //! Proxy class for Subscript with assignment support
 	class SubscriptAssignment{
         T _key;
         Dictionary<T,S,Module> &parent;
@@ -125,7 +122,6 @@ public:
         //operators
 
         bool operator =(const S & dat){
-            cout<<"Updates"<<endl;
             return parent.container.insert(_key,dat);
         }
 
@@ -141,6 +137,7 @@ public:
 
         friend class Dictionary<T,S,Module>;
 	};
+
 
 	SubscriptAssignment operator [] (const T &k){
         return SubscriptAssignment(*this , k);

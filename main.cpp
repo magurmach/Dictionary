@@ -128,8 +128,13 @@ int main(int argc, char **argv)
 		cout<<it1.getKey()<<" "<<it1.getData()<<endl;
 	}
 
+	//assigning
 	dic[6]=7;
+
+	//reading
 	cout<<dic[6]<<endl;
+
+	//reading unassigned value returns gurbage
 	cout<<dic[10]<<endl;
 	return 0;
 }
