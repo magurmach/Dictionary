@@ -128,5 +128,8 @@ int main(int argc, char **argv)
 		cout<<it1.getKey()<<" "<<it1.getData()<<endl;
 	}
 
+	dic[6]=7;
+	cout<<dic[6]<<endl;
+	cout<<dic[10]<<endl;
 	return 0;
 }
