@@ -2,6 +2,10 @@
 #define DICTIONARY_H
 
 
+#include <iostream>
+
+using namespace std;
+
 template < typename T, typename S, template<typename, typename> class Module >
 class Dictionary
 {
@@ -108,10 +112,11 @@ public:
     //! Proxy class for Subscript with assignment support
 	class SubscriptAssignment{
         T _key;
+        S _data;
         Dictionary<T,S,Module> &parent;
 
         //!private constructor, no public instance can be created
-        SubscriptAssignment(Dictionary<T,S,Module> & p,const T & k): parent(p), _key(k){
+        SubscriptAssignment(Dictionary<T,S,Module> & p,const T & k): parent(p), _key(k), _data(){
 
         }
     public:
@@ -125,14 +130,13 @@ public:
             return parent.container.insert(_key,dat);
         }
 
-        operator S const&()
+        operator const S&()
         {
-            S ret;
             Dictionary<T,S,Module>::iterator it=parent.lookUp(_key);
             if(!it.isNullptr()){
-                ret=it.getData();
+                return it.getData();
             }
-            return ret;
+            return _data;
         }
 
         friend class Dictionary<T,S,Module>;
@@ -147,7 +151,6 @@ public:
 	{
 	    return lookUp(_key);
 	}
-
 };
 
 #endif // DICTIONARY_H

@@ -2,7 +2,9 @@
 #include <stdio.h>     //freopen used it
 #include "AvlTree.h"
 #include <cstddef>
+#include <string>
 #include "dictionary.h"
+#include <map>
 #define FRO freopen("input 1.txt","r",stdin);
 #define FROut freopen("out.txt","w",stdout);
 using namespace std;
@@ -134,7 +136,21 @@ int main(int argc, char **argv)
 	//reading
 	cout<<dic[6]<<endl;
 
-	//reading unassigned value returns gurbage
+	//searching for unassigned value returns 0 or default value
 	cout<<dic[10]<<endl;
+
+
+	Dictionary<string,string,AVLTree> smp;
+	smp["hello"]="world";
+
+	//cout<<smp["hello"]<<endl;
+
+	string xn=smp["hello"];
+	cout<<xn<<endl;
+	xn=smp["world"];
+	cout<<xn<<endl;
+	map<string,string> mpx;
+	mpx["hello"]="world";
+	cout<<mpx["hello"]<<endl;
 	return 0;
 }
